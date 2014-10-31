@@ -7,6 +7,7 @@ var turn = false;
 var remaining;
 var missed;
 var matched;
+var previousPick;
 for(var i = 1; i < 32; i++) {
     tiles.push({
         tileNum: i,
@@ -25,6 +26,9 @@ $(document).ready(function(){
         console.log('start game button clicked!');
         tiles = _.shuffle(tiles);
         var selectedTiles = tiles.slice(0,8);
+        missed = 0;
+        matched = 0;
+        remaining = selectedTiles.size;
         var tilePairs = [];
         _.forEach(selectedTiles, function(tile) {
             tilePairs.push(tile);
@@ -65,6 +69,18 @@ $(document).ready(function(){
             var tile = clickedIMG.data('tile');
             console.log(tile);
             flipTile(tile, clickedIMG);
+            if(!turn) {
+                previousPick = tile;
+            } else {
+                if(compareTile(previousPick)) {
+                    matched+= 1;
+                } else {
+                    previousPick.flipped = false;
+                    tile.flipped = false;
+                    missed+= 1;
+                }
+            }
+            turn = !turn;
         })
 
     }); //start game button click
@@ -88,11 +104,12 @@ function flipTile(tile, img) {
 }
 
 function compareTile(otherTile) {
-    if(tile.tileNum == otherTile.tileNum) {
-        return;
+    if (otherTile.tileNum == tile.tileNum) {
+        matched++;
+        return true;
     } else {
-        this.flipped == false;
-        otherTile.flipped == false;
+        flipTile(this);
+        flipTile(otherTile);
         missed++;
         return false;
     }
