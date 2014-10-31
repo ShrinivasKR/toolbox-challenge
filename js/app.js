@@ -3,6 +3,10 @@
 
 var tiles = [];
 var tile;
+var turn = false;
+var remaining;
+var missed;
+var matched;
 for(var i = 1; i < 32; i++) {
     tiles.push({
         tileNum: i,
@@ -67,6 +71,11 @@ $(document).ready(function(){
 }); //document ready button
 
 function flipTile(tile, img) {
+    if(tile.flipped) {
+        return;
+    }
+    turn = !turn;
+    //if
     img.fadeOut(100, function() {
         if (tile.flipped) {
             img.attr('src', 'img/tile-back.png');
@@ -76,4 +85,15 @@ function flipTile(tile, img) {
         tile.flipped = !tile.flipped;
         img.fadeIn(100);
     });
+}
+
+function compareTile(otherTile) {
+    if(tile.tileNum == otherTile.tileNum) {
+        return;
+    } else {
+        this.flipped == false;
+        otherTile.flipped == false;
+        missed++;
+        return false;
+    }
 }
