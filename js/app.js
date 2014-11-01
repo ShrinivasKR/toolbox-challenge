@@ -91,7 +91,7 @@ $(document).ready(function(){
                             missed+= 1;
                             previousImg = null;
                             detectClick = true;
-                        }, 1000)
+                        }, 1000);
                     }
                 }
             }
