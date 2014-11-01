@@ -63,8 +63,8 @@ $(document).ready(function(){
             $('#elapsed-seconds').text(elapsedSeconds + ' seconds');
         }, 1000);
 
+        var detectClick = true;
         $('#game-board img').click(function() {
-            var detectClick = true;
             if(!detectClick) {
                 return;
             }
@@ -90,8 +90,8 @@ $(document).ready(function(){
                             flipTile(previousTile, previousImg);
                             missed+= 1;
                             previousImg = null;
+                            detectClick = true;
                         }, 1000)
-                        detectClick = true;
                     }
                 }
             }
@@ -112,15 +112,3 @@ function flipTile(tile, img) {
         img.fadeIn(100);
     });
 }
-//
-//function compareTile(otherTile) {
-//    if (otherTile.data == tile.data) {
-//        matched++;
-//        return true;
-//    } else {
-//        flipTile(this);
-//        flipTile(otherTile);
-//        missed++;
-//        return false;
-//    }
-//}
