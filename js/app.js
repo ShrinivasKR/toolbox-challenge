@@ -67,30 +67,35 @@ $(document).ready(function(){
             //console.log(this.alt);
             var clickedIMG = $(this);
             var tile = clickedIMG.data('tile');
+
             console.log(tile);
-            flipTile(tile, clickedIMG);
-            if(!turn) {
-                previousTile = tile;
-            } else {
-                if(compareTile(previousTile)) {
-                    matched+= 1;
+            if(!tile.flipped) {
+                flipTile(tile, clickedIMG);
+                if(previousTile == null) {
+                    previousTile = clickedIMG;
                 } else {
-                    previousTile.flipped = false;
-                    tile.flipped = false;
-                    missed+= 1;
+                    if(previousTile.src == tile.src) {
+                        matched+= 1;
+                        previousTile = null;
+                    } else {
+                        window.setTimeout(function () {
+                            flipTile(tile, clickedIMG);
+                            flipTile(previousTile.data('tile'), previousTile);
+                        })
+                        missed+= 1;
+                        clickedIMG = null;
+                        tile = null;
+                        previousTile = null;
+                    }
                 }
+                turn = !turn;
             }
-            turn = !turn;
         })
 
     }); //start game button click
 }); //document ready button
 
 function flipTile(tile, img) {
-    if(tile.flipped) {
-        return;
-    }
-    turn = !turn;
     //if
     img.fadeOut(100, function() {
         if (tile.flipped) {
@@ -102,15 +107,15 @@ function flipTile(tile, img) {
         img.fadeIn(100);
     });
 }
-
-function compareTile(otherTile) {
-    if (otherTile.tileNum == tile.tileNum) {
-        matched++;
-        return true;
-    } else {
-        flipTile(this);
-        flipTile(otherTile);
-        missed++;
-        return false;
-    }
-}
+//
+//function compareTile(otherTile) {
+//    if (otherTile.data == tile.data) {
+//        matched++;
+//        return true;
+//    } else {
+//        flipTile(this);
+//        flipTile(otherTile);
+//        missed++;
+//        return false;
+//    }
+//}
