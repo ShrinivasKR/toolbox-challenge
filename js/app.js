@@ -27,7 +27,7 @@ $(document).ready(function(){
         tiles = _.shuffle(tiles);
         var selectedTiles = tiles.slice(0,8);
         missed = 0;
-        matched = 0;
+        var detectClick = true;
         remaining = selectedTiles.size;
         var tilePairs = [];
         _.forEach(selectedTiles, function(tile) {
@@ -63,7 +63,6 @@ $(document).ready(function(){
             $('#elapsed-seconds').text(elapsedSeconds + ' seconds');
         }, 1000);
 
-        var detectClick = true;
         $('#game-board img').click(function() {
             if(!detectClick) {
                 return;
@@ -80,7 +79,6 @@ $(document).ready(function(){
                 } else {
                     var previousTile = previousImg.data('tile');
                     if(previousTile.src == tile.src) {
-                        matched+= 1;
                         remaining-= 1;
                         previousImg = null;
                     } else {
@@ -89,6 +87,7 @@ $(document).ready(function(){
                             flipTile(tile, clickedIMG);
                             flipTile(previousTile, previousImg);
                             missed+= 1;
+                            $('#matches-missed').text('Matches missed: ' + missed);
                             previousImg = null;
                             detectClick = true;
                         }, 1000);
