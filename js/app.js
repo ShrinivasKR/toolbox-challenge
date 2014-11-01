@@ -7,7 +7,7 @@ var turn = false;
 var remaining;
 var missed;
 var matched;
-var previousTile;
+var previousImg;
 for(var i = 1; i < 32; i++) {
     tiles.push({
         tileNum: i,
@@ -64,6 +64,10 @@ $(document).ready(function(){
         }, 1000);
 
         $('#game-board img').click(function() {
+            var detectClick = true;
+            if(!detectClick) {
+                return;
+            }
             //console.log(this.alt);
             var clickedIMG = $(this);
             var tile = clickedIMG.data('tile');
@@ -71,24 +75,25 @@ $(document).ready(function(){
             console.log(tile);
             if(!tile.flipped) {
                 flipTile(tile, clickedIMG);
-                if(previousTile == null) {
-                    previousTile = clickedIMG;
+                if(previousImg == null) {
+                    previousImg = clickedIMG;
                 } else {
+                    var previousTile = previousImg.data('tile');
                     if(previousTile.src == tile.src) {
                         matched+= 1;
-                        previousTile = null;
+                        remaining-= 1;
+                        previousImg = null;
                     } else {
+                        detectClick = false;
                         window.setTimeout(function () {
                             flipTile(tile, clickedIMG);
-                            flipTile(previousTile.data('tile'), previousTile);
-                        })
-                        missed+= 1;
-                        clickedIMG = null;
-                        tile = null;
-                        previousTile = null;
+                            flipTile(previousTile, previousImg);
+                            missed+= 1;
+                            previousImg = null;
+                        }, 1000)
+                        detectClick = true;
                     }
                 }
-                turn = !turn;
             }
         })
 
