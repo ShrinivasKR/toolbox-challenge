@@ -85,6 +85,11 @@ $(document).ready(function(){
                         remaining -= 1;
                         $('#matches-missed').text('Matches missed: ' + missed);
                         previousImg = null;
+                        if(remaining == 0) {
+                            window.setTimeout(function() {
+                                window.alert("You win!)");
+                            }, 250);
+                        }
                     } else {
                         detectClick = false;
                         window.setTimeout(function () {
