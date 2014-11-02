@@ -87,9 +87,11 @@ $(document).ready(function(){
                         previousImg = null;
                         if(remaining == 0) {
                             window.setTimeout(function() {
-                                window.alert("You win! :)");
+                                //window.alert("You win! :)");
+                                $(".overlay, .overlay-message").show();
                             }, 250);
                         }
+                        updateStatistics();
                     } else {
                         detectClick = false;
                         window.setTimeout(function () {
@@ -99,10 +101,10 @@ $(document).ready(function(){
                             $('#matches-missed').text('Matches missed: ' + missed);
                             previousImg = null;
                             detectClick = true;
+                            updateStatistics();
                         }, 1000);
                     }
                 }
-                updateStatistics();
             }
         })
     }); //start game button click
