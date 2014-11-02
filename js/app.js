@@ -87,7 +87,7 @@ $(document).ready(function(){
                         previousImg = null;
                         if(remaining == 0) {
                             window.setTimeout(function() {
-                                window.alert("You win!)");
+                                window.alert("You win! :)");
                             }, 250);
                         }
                     } else {
