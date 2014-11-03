@@ -14,3 +14,11 @@
 .hidden {
     visibility: hidden;
 }
+
+body {
+    background-color: #c369ff;
+}
+
+#game-board img:hover {
+    transform: scale(1.1,1.1);
+}
