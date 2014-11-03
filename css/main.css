@@ -1,38 +1,16 @@
 
 #game-board img {
-    width: 25%;
-    height: 25%;
+    width: 10%;
+    height: 10%;
     padding: 5px;
     box-sizing: border-box;
 }
 
-#center {
+.center {
     margin-left: auto;
     margin-right: auto;
 }
 
-.overlay, .overlay-one {
-    position:fixed;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
-    background-color:#000000;
-    opacity:0.8;
-    z-index:1001;
-}
-.overlay-message, .overlay-message-one{
-    position: fixed;
-    top: 50%;
-    left: 40%;
-    width:400px;
-    height:250px;
-    background-color:#ffffff
-color: #000000;
-    opacity:1;
-    z-index:1002;
-}
-
-.overlay-message-one {
-    top: 25%;
+.hidden {
+    visibility: hidden;
 }
